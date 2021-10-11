@@ -1,24 +1,23 @@
 node('master'){
 
 	stage('SCM Checkout'){
-		git url:"https://github.com/testyantra2021/MultiBranchPipeline.git",branch:"master"
+		git url:"https://github.com/testyantra2021/SimpleCustomerApp.git",branch:"master"
 	}
 	
-    stage('Compile-Compile'){
-      def mvnHome =  tool name: 'maven-3', type: 'maven'   
-      bat "${mvnHome}/bin/mvn compile"
-    }
-
-    stage('Compile-Package'){
-      def mvnHome =  tool name: 'maven-3', type: 'maven'   
-      bat "${mvnHome}/bin/mvn package"
-    }
 	
-    stage('Generate-TestFile'){
-      def mvnHome =  tool name: 'maven-3', type: 'maven'   
-      bat "${mvnHome}/bin/mvn test"
-      
-    }
+	stage('clean the workspace'){
+		sh "/usr/share/apache-maven/bin/mvn clean"
+			
+	}
+	
+	stage('Compile the code'){
+		sh "/usr/share/apache-maven/bin/mvn compile"
+	}
+		
+	stage('Packaging the code'){
+		sh "/usr/share/apache-maven/bin/mvn package"
+	}	
+	
 	stage('Junit Testing Reports'){
 		junit '**/target/surefire-reports/*.xml'
 	}
@@ -31,5 +30,5 @@ node('master'){
                 inclusionPattern: '**/*.class'
 		)
    	}
+	
 }
-
