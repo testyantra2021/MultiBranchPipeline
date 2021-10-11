@@ -1,7 +1,7 @@
 node('master'){
 
 	stage('SCM Checkout'){
-		git url:"https://github.com/testyantra2021/SimpleCustomerApp.git",branch:"master"
+		git url:"https://github.com/testyantra2021/SimpleCustomerApp.git",branch:"bugfix"
 	}
 	
 	
